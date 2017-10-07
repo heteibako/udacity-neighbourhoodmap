@@ -1,0 +1,63 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+#map {
+  height: 100%;
+}
+
+#sidebar{
+  height: 100vh;
+  width: 200px;
+  background-color: rgba(255, 255, 255, .97);
+  z-index: -999;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  padding: 20px;
+}
+
+
+
+
+ #map {
+     height: 100%;
+ }
+ /*slidebar start*/
+
+
+
+
+
+
+
+ .location {
+     color: rgb(255, 255, 255);
+
+     width: 100%;
+     height: 40px;
+     line-height: 40px;
+     cursor: pointer;
+     margin-top: 10px;
+     transition: .3s;
+     border-radius: 25px;
+     text-align: center;
+ }
+
+ .location:hover {
+     color: white;
+     background-color: #18ce0f;
+
+ }
+
+ /*slidebar end*/
+
+
+.error-message{
+     color: rgb(255, 255, 255);
+}

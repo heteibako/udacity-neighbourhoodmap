@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Udacity Neighborhood Map</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/now-ui-kit.css">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+
+<body>
+
+  <div id="map" class="container-fluid"></div>
+  <div class="row">
+
+  <section id="sidebar" class="bg-warning col-sm-6">
+    <div class="row">
+      <div class="col-md-12 col-sm-4">
+        <h6><span class="now-ui-icons location_pin"></span>THE <br> NEIGHBOURHOOD <br> MAP</h6>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <input type="text" class="form-control" data-bind="textInput:filterContent" placeholder="Search Favorite Places">
+            <div class="error-message" data-bind="visible: networkError">
+              <p>Could not load data. Please try again later.</p> 
+            </div>
+        </div>
+        <h6 class="text-center">Favorite places</h6>
+        <div class="sidebar-content" data-bind="foreach: locations">
+          <div class="location" data-bind="text: name,click:$parent.click">
+          </div>
+        </div>
+      </div>
+</div>
+    </div>
+  </section>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHhoje5UI6serW1URqBOTtKFQV_2UtIQU&v=3&callback=initMap"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js" type="text/javascript"></script>
+  <script src="js/app.js" type="text/javascript"></script>
+  <script src="js/now-ui-kit.js" type="text/javascript"></script>
+  </script>
+</body>
+
+</html>
