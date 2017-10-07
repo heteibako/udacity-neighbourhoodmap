@@ -58,12 +58,13 @@ function ViewModel() {
   };
   self.filter = function () {
     //filter is none
+    var i;
     if (self.filterContent() === "") {
       if (self.locations.length != locations.length) {
         self
           .locations
           .removeAll();
-        for (var i = 0; i < locations.length; i++) {
+        for (i = 0; i < locations.length; i++) {
           self
             .locations
             .push(locations[i]);
