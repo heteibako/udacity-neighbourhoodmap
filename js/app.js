@@ -2,37 +2,37 @@
 //Locations array
 var locations = [
   {
-    name: 'Alexander Platz',
+    name: "Alexander Platz",
     location: {
       lat: 52.5219184,
       lng: 13.4132147
     }
   }, {
-    name: 'Berghain',
+    name: "Berghain",
     location: {
       lat: 52.510626,
       lng: 13.442224
     }
   }, {
-    name: 'Theater des Westens',
+    name: "Theater des Westens",
     location: {
       lat: 52.5055548,
       lng: 13.3290325
     }
   }, {
-    name: 'Brandenburger Tor',
+    name: "Brandenburger Tor",
     location: {
       lat: 52.516506,
       lng: 13.381815
     }
   }, {
-    name: 'East Side Gallery',
+    name: "East Side Gallery",
     location: {
       lat: 52.505508,
       lng: 13.4393136
     }
   }, {
-    name: 'Frau Mittenmang',
+    name: "Frau Mittenmang",
     location: {
       lat: 52.5503246,
       lng: 13.4193707
@@ -50,7 +50,7 @@ function ViewModel() {
   }
   self.locations = ko.observableArray(locationsArr);
   self.networkError = ko.observable(false);
-  self.filterContent = ko.observable('');
+  self.filterContent = ko.observable("");
   
   self.click = function (location) {
     var index = locations.indexOf(location);
@@ -58,7 +58,7 @@ function ViewModel() {
   };
   self.filter = function () {
     //filter is none
-    if (self.filterContent() === '') {
+    if (self.filterContent() === "") {
       if (self.locations.length != locations.length) {
         self
           .locations
@@ -75,7 +75,7 @@ function ViewModel() {
     }
     //filter data
     var tempLocationsArrs = [];
-    for (var i = 0; i < locations.length; i++) {
+    for (i = 0; i < locations.length; i++) {
       if (locations[i].name.toLowerCase().indexOf(self.filterContent().toLowerCase()) > -1) {
         tempLocationsArrs.push(locations[i]);
       }
@@ -84,7 +84,7 @@ function ViewModel() {
       self
         .locations
         .removeAll();
-      for (var i = 0; i < tempLocationsArrs.length; i++) {
+      for (i = 0; i < tempLocationsArrs.length; i++) {
         self
           .locations
           .push(tempLocationsArrs[i]);
@@ -95,9 +95,9 @@ function ViewModel() {
         .removeAll();
     }
     console.log(tempLocationsArrs.length);
-    //find the marker's index
+    //find the marker"s index
     var markersArr = [];
-    for (var i = 0; i < tempLocationsArrs.length; i++) {
+    for (i = 0; i < tempLocationsArrs.length; i++) {
       markersArr.push(markers[locations.indexOf(tempLocationsArrs[i])]);
     }
     showMarkers(markersArr);
@@ -119,7 +119,7 @@ var markers = [];
 function initMap() {
   map = new google
     .maps
-    .Map(document.getElementById('map'), {
+    .Map(document.getElementById("map"), {
       center: {
         lat: 52.5219184,
         lng: 13.413214700000026
@@ -135,11 +135,11 @@ function initMap() {
       .maps
       .Marker({position: locations[i].location, map: map, title: locations[i].name});
     markers.push(marker);
-    markers[i].addListener('click', bounce);
+    markers[i].addListener("click", bounce);
   }
   infowindow = new google
     .maps
-    .InfoWindow({content: ''});
+    .InfoWindow({content: ""});
 }
 
 function toggleBounce(marker) {
@@ -156,17 +156,17 @@ function toggleBounce(marker) {
 //Loading the foursquare API to additional data to the info window
 
 function asyncContent(marker, title) {
-  var client_id = 'EMHASFPDCAF20PL2FQHQGGO1U3JR5XSLNGQNFAS4S2WFX3NK';
-  var client_secret = '2QWJTYR14FMA4O4UAJ3B4D3XJXSGBFPC1521EEZGLGO4MEBF';
+  var client_id = "EMHASFPDCAF20PL2FQHQGGO1U3JR5XSLNGQNFAS4S2WFX3NK";
+  var client_secret = "2QWJTYR14FMA4O4UAJ3B4D3XJXSGBFPC1521EEZGLGO4MEBF";
   var request = $
     .ajax({
-      url: 'https://api.foursquare.com/v2/venues/search',
-      dataType: 'json',
-      data: 'limit=1&ll=52.5219184,13.4132147&query=' + title + '&client_id=' + client_id + '&client_secret=' + client_secret + '&v=20170101',
+      url: "https://api.foursquare.com/v2/venues/search",
+      dataType: "json",
+      data: "limit=1&ll=52.5219184,13.4132147&query=" + title + "&client_id=" + client_id + "&client_secret=" + client_secret + "&v=20170101",
       
     })
     .done(function (data) {
-      infowindow.setContent('<h4>' + data.response.venues[0].name + '</h4>Check-ins: ' + data.response.venues[0].stats.checkinsCount + '<br>Social Media: ' + data.response.venues[0].contact.facebookName);
+      infowindow.setContent("<h4>" + data.response.venues[0].name + "</h4>Check-ins: " + data.response.venues[0].stats.checkinsCount + "<br>Social Media: " + data.response.venues[0].contact.facebookName);
 
       infowindow.open(map, marker);
 
