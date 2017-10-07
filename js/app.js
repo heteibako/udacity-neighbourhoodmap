@@ -55,10 +55,10 @@ function ViewModel() {
   self.click = function (location) {
     var index = locations.indexOf(location);
     toggleBounce(markers[index]);
-  }
+  };
   self.filter = function () {
     //filter is none
-    if (self.filterContent() == '') {
+    if (self.filterContent() === '') {
       if (self.locations.length != locations.length) {
         self
           .locations
@@ -75,7 +75,7 @@ function ViewModel() {
     }
     //filter data
     var tempLocationsArrs = [];
-    for (var i = 0; i < locations.length; i++) {
+    for (i = 0; i < locations.length; i++) {
       if (locations[i].name.toLowerCase().indexOf(self.filterContent().toLowerCase()) > -1) {
         tempLocationsArrs.push(locations[i]);
       }
@@ -84,7 +84,7 @@ function ViewModel() {
       self
         .locations
         .removeAll();
-      for (var i = 0; i < tempLocationsArrs.length; i++) {
+      for (i = 0; i < tempLocationsArrs.length; i++) {
         self
           .locations
           .push(tempLocationsArrs[i]);
@@ -93,20 +93,20 @@ function ViewModel() {
       self
         .locations
         .removeAll();
-    }
+    };
     console.log(tempLocationsArrs.length)
     //find the marker's index
     var markersArr = [];
-    for (var i = 0; i < tempLocationsArrs.length; i++) {
+    for (i = 0; i < tempLocationsArrs.length; i++) {
       markersArr.push(markers[locations.indexOf(tempLocationsArrs[i])]);
     }
     showMarkers(markersArr);
-  }
+  };
   self
     .filterContent
     .subscribe(function (newValue) {
       self.filter();
-    })
+    });
 }
 
 /*Model and ModelView  end*/
@@ -127,14 +127,15 @@ function initMap() {
       zoom: 13
     });
   //init markers and infowindow
+  function bounce(){
+    toggleBounce(this);
+  }
   for (var i = 0; i < locations.length; i++) {
     var marker = new google
       .maps
       .Marker({position: locations[i].location, map: map, title: locations[i].name});
     markers.push(marker);
-    markers[i].addListener('click', function () {
-      toggleBounce(this);
-    });
+    markers[i].addListener('click', bounce);
   }
   infowindow = new google
     .maps
@@ -179,11 +180,11 @@ function asyncContent(marker, title) {
 function showMarkers(markersArr) {
   clearAllBounceAndInfo();
   //hide all info
-  for (var i = 0; i < markers.length; i++) {
+  for (i = 0; i < markers.length; i++) {
     markers[i].setMap(null);
   }
   //show the markers
-  for (var i = 0; i < markersArr.length; i++) {
+  for (i = 0; i < markersArr.length; i++) {
     markersArr[i].setMap(map);
     markersArr[i].setAnimation(google.maps.Animation.BOUNCE);
   }
@@ -191,7 +192,7 @@ function showMarkers(markersArr) {
 }
 //clear all animations
 function clearAllBounceAndInfo() {
-  for (var i = 0; i < locations.length; i++) {
+  for (i = 0; i < locations.length; i++) {
     markers[i].setAnimation(null);
     infowindow.close(map, markers[i]);
   }
