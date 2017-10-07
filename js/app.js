@@ -75,7 +75,7 @@ function ViewModel() {
     }
     //filter data
     var tempLocationsArrs = [];
-    for (var i = 0; i < locations.length; i++) {
+    for (i = 0; i < locations.length; i++) {
       if (locations[i].name.toLowerCase().indexOf(self.filterContent().toLowerCase()) > -1) {
         tempLocationsArrs.push(locations[i]);
       }
@@ -84,7 +84,7 @@ function ViewModel() {
       self
         .locations
         .removeAll();
-      for (var i = 0; i < tempLocationsArrs.length; i++) {
+      for (i = 0; i < tempLocationsArrs.length; i++) {
         self
           .locations
           .push(tempLocationsArrs[i]);
@@ -97,7 +97,7 @@ function ViewModel() {
     console.log(tempLocationsArrs.length);
     //find the marker"s index
     var markersArr = [];
-    for (var i = 0; i < tempLocationsArrs.length; i++) {
+    for (i = 0; i < tempLocationsArrs.length; i++) {
       markersArr.push(markers[locations.indexOf(tempLocationsArrs[i])]);
     }
     showMarkers(markersArr);
