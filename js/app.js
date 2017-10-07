@@ -1,6 +1,6 @@
 //Error function
 
-window.onerror = function (msg, url, lineNo, columnNo, error) {
+window.ifErrorOccurs = function (msg, url, lineNo, columnNo, error) {
   var string = msg.toLowerCase();
   var substring = "script error";
   if (string.indexOf(substring) > -1){
@@ -60,7 +60,16 @@ var locations = [
       lat: 52.5503246,
       lng: 13.4193707
     }
-  }
+    }, {
+    
+      name: "Komische Oper",
+      location: {
+        lat: 52.5156675,
+        lng: 13.3868596
+      }
+    }
+  
+  
 ];
 console.log(locations);
 
@@ -78,6 +87,7 @@ function ViewModel() {
   self.click = function (location) {
     var index = locations.indexOf(location);
     toggleBounce(markers[index]);
+    map.panTo(markers[index].position);
   };
   self.filter = function () {
     //filter is none
@@ -167,7 +177,7 @@ function initMap() {
 }
 
 function toggleBounce(marker) {
-  if (marker.getAnimation() !== null) {
+  if (marker.getAnimation()) {
     marker.setAnimation(null);
     infowindow.close(map, marker);
   } else {
@@ -191,17 +201,17 @@ function asyncContent(marker, title) {
       
       
     })
-    .done(function (data) {
-      infowindow.setContent("<h4>" + data.response.venues[0].name + "</h4>Check-ins: " + data.response.venues[0].stats.checkinsCount + "<br><p>Address: " + data.response.venues[0].location.address);
-     
-      if(!data.response.venues[0].location.address || undefined){
-        alert('No address provided');
+    .done(function(data) {
+      if (!data.response.venues[0].location.address || undefined) {
+          infowindow.setContent("<h4>" + data.response.venues[0].name + "</h4>Check-ins: " + data.response.venues[0].stats.checkinsCount + "<br><p>Address: No address provided");
+      } else {
+          infowindow.setContent("<h4>" + data.response.venues[0].name + "</h4>Check-ins: " + data.response.venues[0].stats.checkinsCount + "<br><p>Address: " + data.response.venues[0].location.address);
       }
       infowindow.open(map, marker);
 
     })
     .fail(function (e) {
-      infowindow.setContent("networkError,please check it. please!");
+      infowindow.setContent("Network Error please check your connection!");
       infowindow.open(map, marker);
     });
 }
