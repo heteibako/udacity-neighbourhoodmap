@@ -1,3 +1,26 @@
+//Error function
+
+window.onerror = function (msg, url, lineNo, columnNo, error) {
+  var string = msg.toLowerCase();
+  var substring = "script error";
+  if (string.indexOf(substring) > -1){
+      alert('Script Error: See Browser Console for Detail');
+  } else {
+      var message = [
+          'Message: ' + msg,
+          'URL: ' + url,
+          'Line: ' + lineNo,
+          'Column: ' + columnNo,
+          'Error object: ' + JSON.stringify(error)
+      ].join(' - ');
+
+      alert(message);
+  }
+
+  return false;
+};
+
+
 /*Model and ModelView start*/
 //Locations array
 var locations = [
@@ -159,16 +182,21 @@ function toggleBounce(marker) {
 function asyncContent(marker, title) {
   var client_id = "EMHASFPDCAF20PL2FQHQGGO1U3JR5XSLNGQNFAS4S2WFX3NK";
   var client_secret = "2QWJTYR14FMA4O4UAJ3B4D3XJXSGBFPC1521EEZGLGO4MEBF";
+  
   var request = $
     .ajax({
       url: "https://api.foursquare.com/v2/venues/search",
       dataType: "json",
-      data: "limit=1&ll=52.5219184,13.4132147&query=" + title + "&client_id=" + client_id + "&client_secret=" + client_secret + "&v=20170101",
+      data: "limit=1&ll=52.5219184,13.4132147&query=" + title + "&client_id=" + client_id + "&client_secret=" + client_secret + "&v=20170101"
+      
       
     })
     .done(function (data) {
-      infowindow.setContent("<h4>" + data.response.venues[0].name + "</h4>Check-ins: " + data.response.venues[0].stats.checkinsCount + "<br>Social Media: " + data.response.venues[0].contact.facebookName);
-
+      infowindow.setContent("<h4>" + data.response.venues[0].name + "</h4>Check-ins: " + data.response.venues[0].stats.checkinsCount + "<br><p>Address: " + data.response.venues[0].location.address);
+     
+      if(!data.response.venues[0].location.address || undefined){
+        alert('No address provided');
+      }
       infowindow.open(map, marker);
 
     })
