@@ -75,7 +75,7 @@ function ViewModel() {
     }
     //filter data
     var tempLocationsArrs = [];
-    for (var i = 0; i < locations.length; i++) {
+    for (i = 0; i < locations.length; i++) {
       if (locations[i].name.toLowerCase().indexOf(self.filterContent().toLowerCase()) > -1) {
         tempLocationsArrs.push(locations[i]);
       }
